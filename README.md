@@ -2,7 +2,7 @@
 
 API REST de finanzas personales con autenticacion JWT y subida de comprobantes a Cloudflare R2.
 
-**URL de produccion: https://cashi-api-tui5.onrender.com** (se agrega despues del despliegue en Render)
+**URL de produccion: https://cashi-api-tui5.onrender.com**
 
 ---
 

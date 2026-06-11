@@ -135,8 +135,5 @@ src/
 ## Uso de IA
 
 Este proyecto fue desarrollado con asistencia de Claude (Anthropic) para:
-- Generacion de la estructura base del proyecto
 - Configuracion de Prisma, JWT, bcrypt, Zod y Cloudflare R2
 - Redaccion del README
-
-Todo el codigo fue revisado y comprendido por el equipo.

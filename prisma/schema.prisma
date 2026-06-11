@@ -1,0 +1,50 @@
+// Schema de Prisma con los modelos User, Category y Transaction.
+// User es nuevo en esta versión.
+// Transaction se extendió con userId, date, receiptUrl, latitude y longitude.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int           @id @default(autoincrement())
+  email        String        @unique
+  // Nunca guardamos la contraseña en texto plano — solo el hash
+  passwordHash String
+  createdAt    DateTime      @default(now())
+  transactions Transaction[]
+}
+
+model Category {
+  id           Int           @id @default(autoincrement())
+  name         String        @unique
+  transactions Transaction[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model Transaction {
+  id          Int      @id @default(autoincrement())
+  amount      Float
+  // "income" = ingreso, "expense" = egreso
+  type        String
+  description String?
+  date        DateTime @default(now())
+  // URL del comprobante adjunto (opcional)
+  receiptUrl  String?
+  // Coordenadas GPS opcionales
+  latitude    Float?
+  longitude   Float?
+  categoryId  Int
+  category    Category @relation(fields: [categoryId], references: [id])
+  // Cada transacción pertenece a un usuario
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
